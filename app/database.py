@@ -2,15 +2,18 @@ from fastapi import FastAPI
 from tortoise import Tortoise
 from tortoise.contrib.fastapi import register_tortoise
 
-model_paths = ["app.users.users_models", "app.promocodes.promocodes_models"]
+model_paths = ["app.users.users_models", "app.promocodes.promocodes_models",
+               "app.products.products_models", "app.restaurants.restaurants_models"]
 
 TORTOISE_ORM = {
     "connections": {
-        "default": "postgres://postgres:1234@postgres:5432/pizza",
+        "default": "postgres://postgres:1234@localhost:5432/pizza",
     },
     "apps": {
         "models": {
-            "models": ["app.users.users_models", "app.promocodes.promocodes_models", "aerich.models"],
+            "models": ["app.users.users_models", "app.promocodes.promocodes_models",
+                       "app.products.products_models", "app.restaurants.restaurants_models",
+                       "aerich.models"],
             "default_connection": "default",
         },
     },
