@@ -8,3 +8,6 @@ python-decouple==3.8
 pytz==2023.3.post1
 tzlocal==5.2
 aerich==0.7.2
+
+alembic==1.13.1
+SQLAlchemy==2.0.25
