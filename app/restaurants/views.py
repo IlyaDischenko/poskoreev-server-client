@@ -54,7 +54,6 @@ async def set_street(street: int, request: Request, response: Response):
     if '_ri' in request.cookies and '_oi' in request.cookies and street_query.restaurant_id!=int(request.cookies['_ri']):
         # await Order.filter(id=int(request.cookies['_oi'])).delete()
         # await OrderLog.filter(order_id=int(request.cookies['_oi'])).delete()
-        print(123)
         response.delete_cookie('_oi', httponly=True, samesite='none', secure=True)
     response.set_cookie('_ri', str(street_query.restaurant_id), httponly=True, samesite='none', secure=True)
     response.set_cookie('_si', str(street), httponly=True, samesite='none', secure=True)
