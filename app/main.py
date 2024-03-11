@@ -14,7 +14,7 @@ app = FastAPI()
 
 init_db(app)
 
-origins = ["http://localhost:3000", "http://localhost:80", "https://poskoreev-webclient.vercel.app", "*"]
+origins = ["http://localhost:3000", "http://localhost:80", "https://poskoreev-webclient.vercel.app"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
