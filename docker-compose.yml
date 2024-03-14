@@ -1,16 +1,6 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:latest
-    container_name: my_postgres_db
-    environment:
-      POSTGRES_DB: pizza
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
-    ports:
-      - "5432:5432
-
   fastapi_app:
     build:
       context: .
