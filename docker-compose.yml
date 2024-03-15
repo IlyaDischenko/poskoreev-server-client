@@ -1,35 +1,22 @@
-version: '3'
+version: '3.8'
 
 services:
-  db:
-    restart: always
-    image: postgres:latest
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
-  server:
-    restart: always
+  fastapi_app:
     build:
       context: .
       dockerfile: Dockerfile
-    env_file:
-      - .env
-    container_name: ${SERVER_HOST}
+    container_name: my_fastapi_app
     ports:
-      - ${SERVER_PORT}:${SERVER_PORT}
+      - "80:8000"
     depends_on:
-      - db
+      - postgres
 
   nginx:
-    image: reverse-proxy
-    build:
-        context: ./nginx
-        dockerfile: Dockerfile
     restart: always
-    env_file: .env
+    build:
+      context: ./nginx
     ports:
-      - ${NGINX_PORT}:${NGINX_PORT}
-    depends_on:
-      - server
+      - "80:80"
+      - "443:443"
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
